@@ -1,8 +1,96 @@
+<!DOCTYPE html>
 <html>
     <head>
-        
+        <title>Kalkulator</title>
+        <script src="jquery-3.3.1.min.js" ></script>
+        <script>
+            $(document).ready(function() {
+                $("#operation").change(function() {
+                    $("#komunikat").val("");
+                    let a = parseInt($("#firstNumber").val());
+                    let b = parseInt($("#secondNumber").val());
+                    let operation = $("#operation option:selected").text();
+                    if(operation != " " && !isNaN(a) && !isNaN(b))
+                    {
+                        switch(operation)
+                        {
+                            case "+":
+                                $("#result").val(a + b);
+                                break;
+                            case "-":
+                                $("#result").val(a - b);
+                                break;
+                            case "*":
+                                $("#result").val(a * b);
+                                break;
+                            case "/":
+                                if(b == 0) 
+                                {
+                                    $("#komunikat").text("DZIELENIE PRZEZ ZERO!!!!!!");
+                                }
+                                else
+                                {
+                                    $("#result").val(a / b);
+                                }
+                                break;
+                            case "^":
+                                $("#result").val(Math.pow(a,b));
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        $("#komunikat").text("Coś poszło nie tak...");
+                    }
+                });
+            });
+        </script>
+        <style>
+            #whole, #wynik, #komunikat {
+                width: max-content;
+                margin: 0 auto;
+            }
+            
+            input, select {
+                min-width:265px;
+                min-height: 45px;
+                border-width: 3px;
+                border-color: rgba(50, 50, 50, 0.14);
+                margin: 10px 10px 10px 0px;
+                font-size: 20px;
+            }
+
+            #komunikat {
+                color: #ff0000;
+                font-size: 20px;
+            }
+
+            * {
+                font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                border-radius: 25px;
+            }
+        </style>
     </head>
     <body>
-        
+        <div id="whole"> 
+            <div id="kalkulator">
+                <input type="number" id="firstNumber" />
+                <select id="operation">
+                    <option value=" "> </option>
+                    <option value="+">+</option>
+                    <option value="-">-</option>
+                    <option value="*">*</option>
+                    <option value="/">/</option>
+                    <option value="^">^</option>
+                </select>
+                <input type="number" id="secondNumber" />
+            </div>
+            <div id="wynik">
+                <input type="number" id="result" />
+            </div>            
+            <div id="komunikat">
+                
+            </div>
+        </div>
     </body>
 </html>
